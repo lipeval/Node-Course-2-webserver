@@ -3,6 +3,7 @@ const fs = require('fs')
 const hbs = require('hbs');
 const app = express();
 
+const port = process.env.PORT || 3000;
 
 hbs.registerPartials(__dirname + '/views/partials')
 app.set('view engine', 'hbs');
@@ -20,9 +21,10 @@ app.use((req,res,next)=>{
     next()
 })
 
-app.use((req,res,next) => {
-    res.render('maintenance.hbs')
-})
+// app.use((req,res,next) => {
+//     res.render('maintenance.hbs')
+//     next()
+// })
 
 hbs.registerHelper('getCurrentYear', () => {
     return new Date().getFullYear()
@@ -56,8 +58,8 @@ app.get('/bad', (req, res) => {
     })
 })
 
-const env_PORT = 3000;
 
-app.listen(env_PORT, ()=>{
-    console.log(`Running on port ${env_PORT}`)
+
+app.listen(port, ()=>{
+    console.log(`Running on port ${port}`)
 });
